@@ -1,0 +1,76 @@
+NotesAnaconda
+
+C:\Program Files\Common Files\Oracle\Java\javapath;
+C:\Windows\system32;
+C:\Windows;
+C:\Windows\System32\Wbem;
+C:\Windows\System32\WindowsPowerShell\v1.0\;
+C:\Windows\System32\OpenSSH\;
+C:\Program Files\dotnet\;
+C:\Users\bergm\AppData\Local\Programs\Git\cmd;
+C:\Users\bergm\AppData\Local\Programs\MATLAB\R2026a\bin;
+C:\Users\bergm\AppData\Local\Microsoft\WindowsApps;
+C:\Users\bergm\AppData\Local\Programs\Microsoft VS Code\bin;
+C:\ProgramData\MATLAB\SupportPackages\R2026a\3P.instrset\mingw_w64.instrset\bin; 
+
+With Anaconda shell
+C:\Users\bergm\AppData\Local\Programs\anaconda3
+C:\Users\bergm\AppData\Local\Programs\anaconda3\Library\mingw-w64\bin
+C:\Users\bergm\AppData\Local\Programs\anaconda3\Library\usr\bin
+C:\Users\bergm\AppData\Local\Programs\anaconda3\Library\bin
+C:\Users\bergm\AppData\Local\Programs\anaconda3\Scripts
+C:\Users\bergm\AppData\Local\Programs\anaconda3\bin
+C:\Users\bergm\AppData\Local\Programs\anaconda3\condabin
+C:\Program Files\Common Files\Oracle\Java\javapath
+C:\Windows\system32
+C:\Windows
+C:\Windows\System32\Wbem
+C:\Windows\System32\WindowsPowerShell\v1.0
+C:\Windows\System32\OpenSSH
+C:\Program Files\dotnet
+C:\Users\bergm\AppData\Local\Programs\Git\cmd
+C:\Users\bergm\AppData\Local\Programs\MATLAB\R2026a\bin
+C:\Users\bergm\AppData\Local\Microsoft\WindowsApps
+C:\Users\bergm\AppData\Local\Programs\Microsoft VS Code\bin
+C:\ProgramData\MATLAB\SupportPackages\R2026a\3P.instrset\mingw_w64.instrset\bin
+
+conda create --prefix C:\Users\pbergman\Eclipse\workspace-python\.venv python=3.12 numpy
+conda remove --name .venv --all
+
+C:\Users\bergm\Eclipse\.venv\Lib\venv\scripts\nt\activate.bat 
+
+
+PythonNotes20260507
+
+cmd C:\Users\pbergman\AppData\Local\anaconda3\Scripts\activate.bat
+cd GIT20XX
+cd mat2026
+conda env list
+conda info --envs
+conda create --prefix /path/to/directory python=3.12
+conda create --prefix C:\Users\pbergman\Eclipse\workspace-python\.venv python=3.12 numpy
+conda activate C:\Users\pbergman\Eclipse\.venv
+
+
+conda env remove --prefix C:\Users\pbergman\Eclipse\workspace-python\.venv
+
+
+conda rename -n old_name new_name
+conda create --name new_name --clone old_name
+conda remove --name old_name --all
+conda create --name my_env_name python=3.9
+conda env list 
+
+conda info --envs
+conda activate my_env_name
+
+conda deactivate
+
+
+FOR MATLAB
+
+C:\Users\pbergman\AppData\Local\anaconda3\Scripts\activate.bat
+
+conda activate C:\Users\pbergman\Eclipse\workspace-python\.venv
+
+matlab

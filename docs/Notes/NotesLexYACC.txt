@@ -1,0 +1,120 @@
+can you create a compiler using Flex and Bison 
+to translate "x = 1:10" into "C" code 
+"
+float *x; 
+int z = 10;
+int ii;
+x = malloc(sizeof(float)*z);
+for(ii=0; ii<z;ii++) x[ii] = ii;
+"?
+
+-----------------------------------------------
+lex (lexer.l)
+-----------------------------------------------
+%{
+#include <string.h>
+#include <stdlib.h>
+#include "parser.tab.h"
+%}
+
+%%
+
+[a-zA-Z_][a-zA-Z0-9_]* { yylval.sval = strdup(yytext); return IDENTIFIER; }
+[0-9]+                  { yylval.ival = atoi(yytext); return NUMBER; }
+"="                     { return '='; }
+":"                     { return ':'; }
+[ \t\n]                 { /* Ignore whitespace */ }
+.                       { printf("Unknown character: %s\n", yytext); }
+
+%%
+
+int yywrap() {
+    return 1;
+}
+
+-----------------------------------------------
+yacc (parser.y)
+-----------------------------------------------
+
+%{
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void yyerror(const char *s);
+int yylex(void);
+%}
+
+/* Define yylval types */
+%union {
+    int ival;
+    char *sval;
+}
+
+%token <sval> IDENTIFIER
+%token <ival> NUMBER
+
+%%
+
+program:
+    assignment
+    ;
+
+assignment:
+    IDENTIFIER '=' NUMBER ':' NUMBER {
+        char *var = $1;
+        int start = $3;
+        int end = $5;
+        
+        /* Calculate range size */
+        int size = end - start + 1;
+
+        if (size <= 0) {
+            fprintf(stderr, "Error: Invalid range specified (%d:%d)\n", start, end);
+            free(var);
+            YYERROR;
+        }
+
+        /* Emit the exact translated C source code layout requested */
+        printf("float *%s;\n", var);
+        printf("int z = %d;\n", size);
+        printf("int ii;\n");
+        printf("%s = malloc(sizeof(float)*z);\n", var);
+        printf("for(ii=0; ii<z;ii++) %s[ii] = ii + %d;\n", var, start);
+
+        free(var);
+    }
+    ;
+
+%%
+
+void yyerror(const char *s) {
+    fprintf(stderr, "Compiler Error: %s\n", s);
+}
+
+int main() {
+    printf("/* Enter your assignment statement (e.g., x = 1:10) */\n");
+    yyparse();
+    return 0;
+}
+
+bash
+
+# 1. Process the Bison parser rules
+bison -d parser.y
+
+# 2. Process the Flex token definitions
+flex lexer.l
+
+# 3. Link everything together using GCC
+gcc parser.tab.c lex.yy.c -o range_compiler
+
+./range_compiler
+
+/* Enter your assignment statement (e.g., x = 1:10) */
+x = 1:10
+float *x;
+int z = 10;
+int ii;
+x = malloc(sizeof(float)*z);
+for(ii=0; ii<z;ii++) x[ii] = ii + 1;
