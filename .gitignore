@@ -12,6 +12,7 @@
 *.asv
 *.exe
 *.log
+*.pdf
 ### *.jar # Keep jar files around.
 *.zip
 *.class
