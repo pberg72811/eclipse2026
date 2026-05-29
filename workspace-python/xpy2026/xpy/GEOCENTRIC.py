@@ -1,8 +1,8 @@
 """
 #-------------------------------------------UNCLASSIFIED------------------------------------------
-#  File: xpy.UNIVERSE.py
+#  File: xpy.GEOCENTRIC.py
 #
-#  Desc: A class for UNIVERSE stuff
+#  Desc: A class for GEOCENTRIC stuff
 #
 #  Hist: When       Who  What
 #        05/07/2026 ptb  Initial Code.
@@ -20,10 +20,10 @@ def sph2cart(az,elev,r):
    print(az)
    print(elev)
    print(r)
-   # z = r * sin(elev);
-   # rcoselev = r * cos(elev);
-   # x = rcoselev * cos(az);
-   # y = rcoselev * sin(az);
+   z = r * sin(elev);
+   rcoselev = r * cos(elev);
+   x = rcoselev * cos(az);
+   y = rcoselev * sin(az);
    
    x_y_z = (x,y,z);
    return(x_y_z);
