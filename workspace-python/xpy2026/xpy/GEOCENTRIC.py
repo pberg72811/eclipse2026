@@ -11,6 +11,7 @@
 from xpy.HELIOCENTRIC import HELIOCENTRIC
 from math import sin;
 from math import cos;
+from numpy.fft import fft
 
 
 def sph2cart(az,elev,r):
